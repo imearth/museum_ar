@@ -1,0 +1,10 @@
+{
+  "projectname": "sumridapk",
+  "targets": [
+    {
+      "targetname": "d2",
+      "scriptname": "quizzzzz",
+      "type": "Quiz"
+    }
+  ]
+}

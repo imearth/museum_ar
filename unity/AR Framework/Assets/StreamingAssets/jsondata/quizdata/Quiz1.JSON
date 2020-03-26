@@ -1,0 +1,31 @@
+{
+  "allRoundData": [
+    {
+      "name": "Quiz1",
+      "timeLimitInSeconds": 15,
+      "questions": [
+        {
+          "questionText": "asdasd",
+          "answers": [
+            {
+              "isCorrect": false,
+              "answerText": "aasd"
+            },
+            {
+              "isCorrect": true,
+              "answerText": "dd"
+            },
+            {
+              "isCorrect": false,
+              "answerText": "daa"
+            },
+            {
+              "isCorrect": false,
+              "answerText": "ddd"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
