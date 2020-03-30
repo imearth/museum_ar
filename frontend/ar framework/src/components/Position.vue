@@ -1,30 +1,19 @@
 <template>
-  <div>
-    <div>
-      <hr />
-      <br />
-      <label for="n_x-input">position_x input:</label>
-      <input id="position_x-input" type="text" name="_msg" v-model="p_x " />
-      <br />
-      <label for="position_y-input">position_y input:</label>
-      <input id="position_y-input" type="text" name="msg" v-model="p_y " />
-      <br />
-      <label for="position_z-input">position_z input:</label>
-      <input id="positio_z-input" type="text" name="msg" v-model="p_z" />
-      <br />
-      <label for="r_x-input">rotation_x input:</label>
-      <input id="rotation_x-input" type="text" name="msg" v-model="r_x " />
-      <br />
-      <label for="rotation_y-input">rotation_y input:</label>
-      <input id="rotation_y-input" type="text" name="msg" v-model="r_y " />
-      <br />
-      <label for="rotation_z-input">rotation_z input:</label>
-      <input id="rotation_z-input" type="text" name="msg" v-model="r_z" />
-      <br />
-      <hr />
-      <button type="button" name="button" v-on:click="emitToParent">Click me to increment!</button>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-text-field label="position x input" v-model="p_x"></v-text-field>
+        <v-text-field label="position y input" v-model="p_y"></v-text-field>
+        <v-text-field label="position z input" v-model="p_z"></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field label="rotation x input" v-model="r_x"></v-text-field>
+        <v-text-field label="rotation y input" v-model="r_y"></v-text-field>
+        <v-text-field label="rotation z input" v-model="r_z"></v-text-field>
+      </v-col>
+    </v-row>
+    <v-btn color="success" @click="emitToParent">set</v-btn>
+  </v-container>
 </template>
 
 <script>
@@ -73,25 +62,3 @@ export default {
   /* eslint-enable */
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>

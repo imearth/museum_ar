@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col cols="6">
         <h1>This is a Target Create Page</h1>
         <p>This is a form.</p>
 
@@ -10,28 +10,30 @@
     </v-row>
 
     <v-row>
-      <v-col class="large-12 medium-12 small-12 cell">
-        <label>
+      <v-col cols="5">
+        <!-- <label>
           File
           <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-        </label>
+        </label>-->
 
-        <v-file-input label="File" @change="handleFileUpload"></v-file-input>
-        <v-btn v-on:click="submitFile()">Upload</v-btn>
+        <v-file-input label="File" v-model="file"></v-file-input>
+      </v-col>
+      <v-col>
+        <v-btn :disabled="!Boolean(file)" v-on:click="submitFile">Upload</v-btn>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col cols="6">
         <p>จำนวน Target</p>
         <v-text-field label="จำนวน Target:" type="number" min="0" v-model="num" outlined></v-text-field>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col v-for="(item, i) in targetdata" :key="i">
+      <v-col cols="6" md="6" sm="12" v-for="(item, i) in targetdata" :key="i">
         <v-card>
-          <v-card-title>{{item.targetname}}</v-card-title>
+          <v-card-title>Target {{i+1}}: {{item.targetname}}</v-card-title>
           <v-container>
             <v-text-field label="Target name" v-model="item.targetname" outlined></v-text-field>
 
@@ -44,37 +46,41 @@
 
             <template v-if="item.type === 'Quiz'">
               <v-text-field label="Quiz name" v-model="item.scriptname" outlined></v-text-field>
+              <CreateQuiz :objectname="item.scriptname" :checkboolq="checkbool" />
             </template>
 
             <template v-if="item.type === 'Video'">
               <v-text-field label="Video name" v-model="item.scriptname" outlined></v-text-field>
-            </template>
-
-            <template v-if="item.type === '3DObject'">
-              <v-text-field label="3D Model Name" v-model="item.scriptname" outlined></v-text-field>
-              <v-alert color="orange">***ถ้าใช้งาน 3D จะไม่สามารถสร้าง APK แบบอัตโนมัติได้***</v-alert>
-            </template>
-
-            <template v-if="item.type === 'Quiz'">
-              <v-btn
-                rounded
-                block
-                id="show-modal"
-                @click="$modal.show('modal-createquiz')"
-              >สร้าง Quiz</v-btn>
-              <!-- use the modal component, pass in the prop -->
-              <modal name="modal-createquiz" v-if="true" @close="showModal = false">
-                <CreateQuiz :objectname="item.scriptname" :checkboolq="checkbool" />
-              </modal>
-            </template>
-
-            <template v-if="item.type === 'Video'">
               <div>
-                <v-btn rounded block @click="show(`upload-${i}`)">upload video</v-btn>
+                <v-btn
+                  :disabled="!Boolean(item.scriptname)"
+                  rounded
+                  block
+                  @click="show(`upload-${i}`)"
+                >upload video</v-btn>
                 <modal :name="`upload-${i}`">
                   <VideoUpload :objectname="item.scriptname" />
                 </modal>
               </div>
+            </template>
+
+            <template v-if="item.type === '3DObject'">
+              <v-text-field label="3D Model Name" v-model="item.scriptname" outlined></v-text-field>
+              <v-alert type="warning">***ถ้าใช้งาน 3D จะไม่สามารถสร้าง APK แบบอัตโนมัติได้***</v-alert>
+            </template>
+
+            <template v-if="item.type === 'Quiz'">
+              <!-- <v-btn
+                rounded
+                block
+                id="show-modal"
+                @click="$modal.show('modal-createquiz')"
+              >สร้าง Quiz</v-btn>-->
+
+              <!-- use the modal component, pass in the prop -->
+              <!-- <modal name="modal-createquiz" v-if="true" @close="showModal = false"> -->
+              <!-- <CreateQuiz :objectname="item.scriptname" :checkboolq="checkbool" /> -->
+              <!-- </modal> -->
             </template>
 
             <v-card-actions>
@@ -92,11 +98,16 @@
       </v-col>
     </v-row>
 
+    <template v-if="checkbool">
+      <v-row>
+        <v-col>
+          <v-btn color="success" @click="createAPK">สร้างแอปอัติโนมัติ</v-btn>
+        </v-col>
+      </v-row>
+    </template>
+
     <v-row>
       <v-col>
-        <template v-if="this.checkbool === true">
-          <v-btn color="success" @click="createAPK">สร้างแอปอัติโนมัติ</v-btn>
-        </template>
         <v-btn color="success" @click="writeFile">ดาวน์โหลดไฟล์ JSON สำหรับทำแบบ manual</v-btn>
       </v-col>
     </v-row>
@@ -131,7 +142,7 @@ export default {
 
   data() {
     return {
-      file: "",
+      file: null,
       projectname: null,
       num: 0,
       targetdata: [{}],
