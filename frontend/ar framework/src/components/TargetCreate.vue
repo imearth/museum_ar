@@ -69,7 +69,7 @@
               <v-alert type="warning">***ถ้าใช้งาน 3D จะไม่สามารถสร้าง APK แบบอัตโนมัติได้***</v-alert>
             </template>
 
-            <template v-if="item.type === 'Quiz'">
+
               <!-- <v-btn
                 rounded
                 block
@@ -81,7 +81,7 @@
               <!-- <modal name="modal-createquiz" v-if="true" @close="showModal = false"> -->
               <!-- <CreateQuiz :objectname="item.scriptname" :checkboolq="checkbool" /> -->
               <!-- </modal> -->
-            </template>
+
 
             <v-card-actions>
               <v-btn block @click="show(`modal-${i}`)" color="primary">set position</v-btn>
