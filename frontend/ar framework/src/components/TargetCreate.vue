@@ -85,7 +85,7 @@
 
             <v-card-actions>
               <v-btn block @click="show(`modal-${i}`)" color="primary">set position</v-btn>
-              <modal :name="`modal-${i}`">
+              <modal :name="`modal-${i}`" width="70%" height="auto" :scrollable="true">
                 <Position
                   :index="i"
                   v-on:childToParent="onChildClick"
@@ -385,4 +385,6 @@ li {
 a {
   color: #42b983;
 }
+
+
 </style>

@@ -3,9 +3,21 @@ import VueRouter from 'vue-router'
 import TargetCreate from '../components/TargetCreate.vue'
 import QuizCreate from '../components/QuizCreate.vue'
 import VideoUpload from '../components/VideoUpload.vue'
+import Position from '../components/Position.vue'
+import Chart from '../components/Chart.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/ch',
+    name: 'ch',
+    component: Chart
+  },
+  {
+    path: '/po',
+    name: 'po',
+    component: Position
+  },
   {
     path: '/up',
     name: 'up',
