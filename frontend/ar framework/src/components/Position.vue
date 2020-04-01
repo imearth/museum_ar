@@ -23,7 +23,7 @@
                     <v-slider v-model="r_x" min="-10" max="10" label="หมุนในแกนนอน" color="green lighten-1" track-color="green lighten-1" thumb-color="green lighten-1"></v-slider>
                     <v-slider v-model="r_y" min="-10" max="10" label="หมุนในแกนตั้ง" color="green lighten-1" track-color="green lighten-1" thumb-color="green lighten-1"></v-slider>
                     <v-slider v-model="r_z" min="-10" max="10" label="หมุนในแกน z" color="green lighten-1" track-color="green lighten-1" thumb-color="green lighten-1"></v-slider>
-                    <v-btn color="success" @click="emitToParent">set</v-btn>
+                    <v-btn color="success" @click="emitToParent" >set</v-btn>
                 </v-col>
                 
             </v-row>
