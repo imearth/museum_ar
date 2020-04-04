@@ -64,8 +64,8 @@
         </v-row>
 
         <v-row>
-          <v-col>
-            <div v-if="this.checkboolq===true">
+          <v-col v-if="checkboolq">
+            <div>
               <v-btn @click="createQuizfile">สร้าง quiz</v-btn>
             </div>
           </v-col>

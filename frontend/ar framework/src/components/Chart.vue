@@ -246,7 +246,6 @@ export default {
             y: valueY,
             extraInfo: "info"
           });
-          console.log(dataset.data);
         });
         this.globalChartRef.update();
       }

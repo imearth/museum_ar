@@ -26,6 +26,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    component: TargetCreate
   },
 {
     path: '/createtarget',

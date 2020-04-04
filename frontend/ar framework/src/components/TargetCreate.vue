@@ -11,11 +11,6 @@
 
     <v-row>
       <v-col cols="5">
-        <!-- <label>
-          File
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-        </label>-->
-
         <v-file-input label="File" v-model="file"></v-file-input>
       </v-col>
       <v-col>
@@ -69,29 +64,8 @@
               <v-alert type="warning">***ถ้าใช้งาน 3D จะไม่สามารถสร้าง APK แบบอัตโนมัติได้***</v-alert>
             </template>
 
-
-              <!-- <v-btn
-                rounded
-                block
-                id="show-modal"
-                @click="$modal.show('modal-createquiz')"
-              >สร้าง Quiz</v-btn>-->
-
-              <!-- use the modal component, pass in the prop -->
-              <!-- <modal name="modal-createquiz" v-if="true" @close="showModal = false"> -->
-              <!-- <CreateQuiz :objectname="item.scriptname" :checkboolq="checkbool" /> -->
-              <!-- </modal> -->
-
-
             <v-card-actions>
-              <v-btn block @click="show(`modal-${i}`)" color="primary">set position</v-btn>
-              <modal :name="`modal-${i}`" width="70%" height="auto" :scrollable="true">
-                <Position
-                  :index="i"
-                  v-on:childToParent="onChildClick"
-                  v-on:IndexchildToParent="onIndexChildClick"
-                />
-              </modal>
+               <Position :index="i" @positionSet="onPositionSet"></Position>
             </v-card-actions>
           </v-container>
         </v-card>
@@ -145,7 +119,7 @@ export default {
       file: null,
       projectname: null,
       num: 0,
-      targetdata: [{}],
+      targetdata: [],
       targetjson: null,
       fromChild: "", // This value is set to the value emitted by the child
       indexFromChild: "",
@@ -166,7 +140,7 @@ export default {
         this.targetdata.push({
           targetname: "",
           scriptname: "",
-          type: "",
+          type: "3DObject",
           position_x: "0",
           position_y: "0",
           position_z: "0",
@@ -261,26 +235,17 @@ export default {
     hide(modalName) {
       this.$modal.hide(modalName);
     },
-    onChildClick(value) {
-      console.log(`[TargetCreate.vue]:[onChildClick] ${JSON.stringify(value)}`);
-      this.fromChild = value;
-    },
-    onIndexChildClick(index) {
-      // console.log(`[TargetCreate.vue]:[onIndexChildClick] index=${index}`);
-      // console.log(`fromChild: ` + JSON.stringify(this.fromChild));
+    onPositionSet(data) {
+      console.log("[positionSet] " + JSON.stringify(data));
+      const index = data.index;
+      const pr_data = data.pr_data;
 
-      this.targetdata[index] = {
-        ...this.targetdata[index],
-        ...this.fromChild
-      };
-      //   this.targetdata[index].position_x = this.fromChild.p_x;
-      //   this.targetdata[index].position_y = this.fromChild.p_y;
-      //   this.targetdata[index].position_z = this.fromChild.p_z;
-      //   this.targetdata[index].rotation_x = this.fromChild.r_x;
-      //   this.targetdata[index].rotation_y = this.fromChild.r_y;
-      //   this.targetdata[index].rotation_z = this.fromChild.r_z;
-      console.log(this.fromChild);
-      this.hide(`modal-${index}`);
+      this.targetdata[index].position_x = pr_data.position_x;
+      this.targetdata[index].position_y = pr_data.position_y;
+      this.targetdata[index].position_z = pr_data.position_z;
+      this.targetdata[index].rotation_x = pr_data.rotation_x;
+      this.targetdata[index].rotation_y = pr_data.rotation_y;
+      this.targetdata[index].rotation_z = pr_data.rotation_z;
     },
     submitFile() {
       /*
@@ -310,13 +275,6 @@ export default {
           console.log("FAILURE!!");
         });
     },
-
-    /*
-          Handles a change on the file upload
-        */
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-    },
     submitVideo() {
       /*
                     Initialize the form data
@@ -344,13 +302,6 @@ export default {
         .catch(function() {
           console.log("FAILURE!!");
         });
-    },
-
-    /*
-          Handles a change on the file upload
-        */
-    handleVideoUpload() {
-      this.video = this.$refs.video.files[0];
     },
     check3DObject() {
       var x;
