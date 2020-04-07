@@ -13,7 +13,6 @@
             <v-text-field label="จำนวนคำถาม" v-model="num" type="number" min="1"></v-text-field>
           </v-col>
         </v-row>
-        {{questions}}
         <v-row v-for="(item, i) in questions" :key="i">
           <v-col>
             <v-text-field outlined :label="`คำถามที่ ${i+1}`" v-model="item.questionText"></v-text-field>

@@ -1,9 +1,10 @@
-<template>
-  <v-container>
+<template >
+  <v-container class="align-center">
     <v-row>
       <v-col cols="6">
-        <h1>This is a Target Create Page</h1>
-        <p>This is a form.</p>
+        <h1>Target Create</h1>
+        <br/>
+
 
         <v-text-field label="Application name" v-model="projectname" outlined></v-text-field>
       </v-col>
@@ -20,7 +21,6 @@
 
     <v-row>
       <v-col cols="6">
-        <p>จำนวน Target</p>
         <v-text-field label="จำนวน Target:" type="number" min="0" v-model="num" outlined></v-text-field>
       </v-col>
     </v-row>
@@ -28,7 +28,7 @@
     <v-row>
       <v-col cols="6" md="6" sm="12" v-for="(item, i) in targetdata" :key="i">
         <v-card>
-          <v-card-title>Target {{i+1}}: {{item.targetname}}</v-card-title>
+          <v-subheader class="pl-3 md-6">Target {{i+1}}: {{item.targetname}} </v-subheader>
           <v-container>
             <v-text-field label="Target name" v-model="item.targetname" outlined></v-text-field>
 
@@ -86,7 +86,6 @@
       </v-col>
     </v-row>
 
-    <pre>{{targetdata}}</pre>
   </v-container>
 </template>
 
@@ -128,7 +127,7 @@ export default {
       showModal: false,
       video: "",
       checkbool: true,
-      targetType: ["3DObject", "Video", "Quiz"]
+      targetType: [ "Video", "Quiz", "3DObject"]
     };
   },
   /* eslint-disable */
@@ -140,7 +139,7 @@ export default {
         this.targetdata.push({
           targetname: "",
           scriptname: "",
-          type: "3DObject",
+          type: "Video",
           position_x: "0",
           position_y: "0",
           position_z: "0",
