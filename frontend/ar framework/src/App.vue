@@ -16,7 +16,7 @@
        
     </v-app-bar>
 
-    <v-content>
+    <v-content class="app-bg">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -30,3 +30,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+.app-bg {
+  background-color: #f8f8fa;
+}
+</style>

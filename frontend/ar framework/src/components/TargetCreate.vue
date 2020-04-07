@@ -1,38 +1,47 @@
 <template>
 <v-container justify="center" center>
-    <v-card
-    class="mx-auto "
-    max-width="1000"
-    outlined center>
-        <v-row class="align-center">
-            <v-col cols="6">
-                <h1>Target Create</h1>
-                <br />
+    <v-card class="mx-auto " max-width="900" outlined center style=" padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;">
+        <v-card>
+            <v-container>
+                <v-row class="align-center">
+                    <v-col cols="6">
+                        <h1>Target Create</h1>
+                        <br />
 
-                <v-text-field label="Application name"  v-model="projectname" outlined></v-text-field>
-            </v-col>
-        </v-row>
+                        <v-text-field label="Application name" v-model="projectname" outlined></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
 
-        <v-row>
-            <v-col cols="5">
-                <v-file-input label="File" v-model="file"></v-file-input>
-            </v-col>
-            <v-col>
-                <v-btn :disabled="!Boolean(file)" v-on:click="submitFile">Upload</v-btn>
-            </v-col>
-        </v-row>
+                    <v-col cols="5">
+                        <v-file-input messages="* กรุณาอัปโหลด .wtc file จากเว็บไซต์ wikitude" label="File" v-model="file"></v-file-input>
+                    </v-col>
+                    <v-col>
+                        <v-btn :disabled="!Boolean(file)" v-on:click="submitFile">Upload </v-btn>
+                    </v-col>
 
-        <v-row>
-            <v-col cols="6">
-                <v-text-field label="จำนวน Target:" type="number" min="0" v-model="num" outlined></v-text-field>
-            </v-col>
-        </v-row>
-
+                </v-row>
+            </v-container>
+        </v-card>
+        <br />
+        <v-card>
+            <v-container>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field label="จำนวน Target:" type="number" min="0" v-model="num" outlined></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-card>
         <v-row>
             <v-col cols="6" md="6" sm="12" v-for="(item, i) in targetdata" :key="i">
                 <v-card>
-                    <v-subheader class="pl-3 md-6">Target {{i+1}}: {{item.targetname}} </v-subheader>
                     <v-container>
+                        <v-subheader class="pl-3 md-6">Target {{i+1}}: {{item.targetname}} </v-subheader>
+
                         <v-text-field label="Target name" v-model="item.targetname" outlined></v-text-field>
 
                         <v-select label="Target Type" :items="targetType" v-model="item.type" @change="check3DObject"></v-select>
