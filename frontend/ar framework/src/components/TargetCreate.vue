@@ -1,16 +1,15 @@
 <template>
 <v-container justify="center" center>
-    <v-card class="mx-auto " max-width="900" outlined center style=" padding-top: 30px;
+    <v-card class="mx-auto " max-width="1000" outlined center style=" padding-top: 30px;
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 30px;">
         <v-card>
             <v-container>
+                <h1>Create Tourist Guide Application With Augmented Reality</h1>
                 <v-row class="align-center">
                     <v-col cols="6">
-                        <h1>Target Create</h1>
                         <br />
-
                         <v-text-field label="Application name" v-model="projectname" outlined></v-text-field>
                     </v-col>
                 </v-row>
@@ -77,7 +76,13 @@
         <template v-if="checkbool">
             <v-row>
                 <v-col>
-                    <v-btn color="success" @click="createAPK">สร้างแอปอัติโนมัติ</v-btn>
+                    <template v-if="loading">
+                        <v-subheader class="pl-3 md-6">กำลังสร้างแอปพลิเคชัน กรุณารอ </v-subheader>
+                        <v-progress-linear v-model="load.percent" :indeterminate="load.indeterminate"></v-progress-linear>
+                    </template>
+                    <template v-else>
+                        <v-btn color="success" @click="createAPK">สร้างแอปอัติโนมัติ</v-btn>
+                    </template>
                 </v-col>
             </v-row>
         </template>
@@ -129,7 +134,13 @@ export default {
             showModal: false,
             video: "",
             checkbool: true,
-            targetType: ["Video", "Quiz", "3DObject"]
+            targetType: ["Video", "Quiz", "3DObject"],
+            loading: false,
+            load: {
+                percent: 5,
+                indeterminate: false,
+                interval: 0
+            }
         };
     },
     /* eslint-disable */
@@ -195,6 +206,8 @@ export default {
                         }).catch(console.error());
                         */
                 console.log("press eiei");
+                this.loading = true;
+                this.loadingBar(true);
                 axios({
                     url: "http://localhost:3000/createTarget",
                     timeout: 900000,
@@ -202,6 +215,10 @@ export default {
                     method: "POST",
                     responseType: "blob" // important
                 }).then(response => {
+                    setTimeout(() => {
+                        this.load.percent = 100;
+                    }, 1500)
+                    
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement("a");
                     link.href = url;
@@ -209,6 +226,11 @@ export default {
                     document.body.appendChild(link);
                     link.click();
                     axios.post("http://localhost:3000/deleteold");
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.loadingBar(false);
+                    }, 3000)
+
                 });
 
                 /*
@@ -311,6 +333,24 @@ export default {
                 if (x.type == "3DObject") {
                     this.checkbool = false;
                 }
+            }
+        },
+        loadingBar(isLoading) {
+            if (isLoading) {
+                this.load.indeterminate = true
+                this.load.percent = 0
+
+                setTimeout(() => {
+                    this.load.indeterminate = false
+                    this.load.interval = setInterval(() => {
+                        if (this.load.percent > 93) {
+                            clearInterval(this.load.interval);
+                        }
+                        this.load.percent += 0.4;
+                    }, 2000)
+                }, 2500)
+            } else {
+                clearInterval(this.load.interval);
             }
         }
     }

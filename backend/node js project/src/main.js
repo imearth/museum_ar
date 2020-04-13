@@ -22,10 +22,24 @@ app.use(bodyParser.json())
 app.post("/createTarget", async (req, res) => {
     req.setTimeout(900000);
     console.log("createTarget" + req.body.projectname)
+    let access_token = "";
     if (req.body) {
         let filename = "Target.JSON"
         console.log(path + filename);
         console.log(req.body);
+        await Axios.post('https://account.uipath.com/oauth/token', {
+            "grant_type": "refresh_token",
+            "client_id": "8DEv1AMNXczW3y4U15LL3jYf62jK93n5",
+            "refresh_token": "g9nUulv3Z96vC4_lqpC-R6qhVTqBBTFdRuWH6vpOrWTTA"
+        }, {
+            headers: {
+                'X-UIPATH-TenantName': 'KMITLDefaul1bf2133371',
+                'Content-Type': "application/json"
+            }
+        }).then((response) => {
+            access_token = "Bearer "+response.data.access_token;
+            console.log(access_token);
+        });
         fs.writeFileSync(path + filename, JSON.stringify(req.body, null, 2), function(err) {
             if (err) throw err;
         });
@@ -39,7 +53,7 @@ app.post("/createTarget", async (req, res) => {
         }, {
             headers: {
                 'X-UIPATH-TenantName': 'KMITLDefaul1bf2133371',
-                Authorization: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJUTkVOMEl5T1RWQk1UZEVRVEEzUlRZNE16UkJPVU00UVRRM016TXlSalUzUmpnMk4wSTBPQSJ9.eyJodHRwczovL3VpcGF0aC9lbWFpbCI6ImltZWFydGhnZ3dwQGdtYWlsLmNvbSIsImh0dHBzOi8vdWlwYXRoL2VtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2FjY291bnQudWlwYXRoLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDExNjY4MTUzNDYxODk0NDQ4MjE0NCIsImF1ZCI6WyJodHRwczovL29yY2hlc3RyYXRvci5jbG91ZC51aXBhdGguY29tIiwiaHR0cHM6Ly91aXBhdGguZXUuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU4NDYxMjQyOCwiZXhwIjoxNTg0Njk4ODI4LCJhenAiOiI4REV2MUFNTlhjelczeTRVMTVMTDNqWWY2MmpLOTNuNSIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgb2ZmbGluZV9hY2Nlc3MifQ.J3CuppoOQkXFmLHT1cl7aV-7KS0nvQow5gdf5Qhn0ObOMhIYJNGBH0FW5yMG3h-O03IoAzQQti00MjlPExN0314McB0cdx0I8PpGHoydou6pinruHu48wkACQSa-ACWsBwsgxxP0QlXJc-_iPyah-sw69hZTPg2WDWfKHONfbvryhncCV_Ig2c23jfBSqi4S17Mrlcw3GYyQeE9nqOVIykkS2Kt5A1lQZ-Ml8suAxYDWjUOcceuDLCjedbGyzOPJxH3Ja89ILyZfoU6yxOM_Sb_ZGFXIWCGJ5iM2ulWZsW1dj_DO29oPqN6Ac1OmN-ZQCLz8aQCRbQT2N5SZFXTjtQ"
+                Authorization: access_token
             }
         });
         //เขียน method check file exits
@@ -101,13 +115,13 @@ app.post("/uploadTarget", (req, res) => {
 app.post("/deleteold", (req, res) => {
     const path = 'D:/unity project/APK/'
     try {
-        fs.unlinkSync(path+'appname.zip')
+        fs.unlinkSync(path + 'appname.zip')
         //file removed
     } catch (err) {
         console.error(err)
     }
     try {
-        fs.unlinkSync(path+'appname.apk')
+        fs.unlinkSync(path + 'appname.apk')
         //file removed
     } catch (err) {
         console.error(err)
@@ -115,12 +129,11 @@ app.post("/deleteold", (req, res) => {
     res.send("deleted")
 });
 app.post("/uploadVideo", (req, res) => {
-	req.setTimeout(900000);
-	console.log(req.body);
-
-	 if (req.files) {
+    req.setTimeout(900000);
+    console.log(req.body);
+    if (req.files) {
         var file = req.files.file,
-            filename = req.body.name+'.mp4';
+            filename = req.body.name + '.mp4';
         file.mv("D:/unity project/AR Framework/Assets/StreamingAssets/video/" + filename, function(err) {
             if (err) {
                 console.log(err)
@@ -131,5 +144,4 @@ app.post("/uploadVideo", (req, res) => {
         })
     }
 });
-
 app.listen(PORT, HOST);
