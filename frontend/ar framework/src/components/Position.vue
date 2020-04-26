@@ -9,7 +9,7 @@
         <v-container>
             <v-row align="center" justify="center">
                 <v-col cols="9">
-                    <Chart @valueChange="valueChange" style=" background-image:url(./assets/chartbg/02.jpg);"></Chart>
+                    <Chart @valueChange="valueChange"></Chart>
                 </v-col>
                 <v-col cols="3">
                     <!--  
@@ -48,10 +48,8 @@
                 </v-col>
 
                 <div>
-            <h1>Hello world</h1>
+            <h1>Change background image</h1>
             <input id="input" type="file" name="photo" ref="bgfile" @change="setBG">
-            <div id="dis1" class="test"></div>
-            <img src id="display">
         </div>
             </v-row>
         </v-container>
@@ -117,8 +115,7 @@ export default {
             const reader = new FileReader();
 
             reader.addEventListener("load", () => {
-                console.log(reader.result);
-                document.getElementById("dis1").style.backgroundImage = `url(${
+                document.getElementById("ChartCnvs").style.backgroundImage = `url(${
           reader.result
         })`;
             });

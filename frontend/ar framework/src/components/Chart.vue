@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <canvas id="ChartCnvs" width="400" height="400" style="background-image: url(backgroundimage.jpg);"></canvas>
+    <canvas id="ChartCnvs" width="400" height="400"></canvas>
   </v-container>
 </template>
 
@@ -276,3 +276,9 @@ export default {
   /* eslint-enable */
 };
 </script>
+
+<style scope>
+#ChartCnvs {
+  background-image: url(../assets/chartbg/02.jpg);
+}
+</style>
