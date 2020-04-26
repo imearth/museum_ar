@@ -5,10 +5,11 @@
     </template>
 
     <v-card>
+
         <v-container>
             <v-row align="center" justify="center">
                 <v-col cols="9">
-                    <Chart @valueChange="valueChange"></Chart>
+                    <Chart @valueChange="valueChange" style=" background-image:url(C:/Users/imearthz/Documents/GitHub/museum_ar/frontend/ar framework/src/assets/chartbg);"></Chart>
                 </v-col>
                 <v-col cols="3">
                     <!--  
@@ -45,6 +46,13 @@
                         </v-col>
                     </v-row>
                 </v-col>
+
+                <div>
+            <h1>Hello world</h1>
+            <input id="input" type="file" name="photo" ref="bgfile" @change="setBG">
+            <div id="dis1" class="test"></div>
+            <img src id="display">
+        </div>
             </v-row>
         </v-container>
     </v-card>
@@ -86,12 +94,12 @@ export default {
     methods: {
         emitToParent(event) {
             this.pr_data = {
-                position_x: this.p_x,
-                position_y: this.p_y,
-                position_z: this.p_z,
-                rotation_x: this.r_x,
-                rotation_y: this.r_y,
-                rotation_z: this.r_z
+                position_x: `${this.p_x}`,
+                position_y: `${this.p_y}`,
+                position_z: `${this.p_z}`,
+                rotation_x: `${this.r_x}`,
+                rotation_y: `${this.r_y}`,
+                rotation_z: `${this.r_z}`
             };
 
             this.$emit("positionSet", {
@@ -103,6 +111,19 @@ export default {
         valueChange(value) {
             this.p_x = value.x;
             this.p_y = value.y;
+        },
+        setBG(evt) {
+            const img = evt.target.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", () => {
+                console.log(reader.result);
+                document.getElementById("dis1").style.backgroundImage = `url(${
+          reader.result
+        })`;
+            });
+
+            reader.readAsDataURL(img); // get file url
         }
     }
     /* eslint-enable */

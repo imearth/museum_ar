@@ -61,7 +61,7 @@
             -->
           </v-col>
         </v-row>
-
+      
         <v-row>
           <v-col v-if="checkboolq">
             <div>
@@ -137,11 +137,11 @@ export default {
     writeFile: function(event) {
       // `event` is the native DOM event
       if (event) {
-        let filename = this.name + ".JSON";
+        let filename = this.objectname + ".JSON";
         this.targetjson = {
           allRoundData: [
             {
-              name: this.name,
+              name: this.objectname,
               timeLimitInSeconds: this.timeLimitInSeconds,
               questions: this.questions
             }
@@ -157,9 +157,10 @@ export default {
     createQuizfile: function(event) {
       // `event` is the native DOM event
       if (event) {
+      console.log('create quiz file');
         let allRoundData = [
           {
-            name: this.name,
+            name: this.objectname,
             timeLimitInSeconds: this.timeLimitInSeconds,
             questions: this.questions
           }
@@ -171,7 +172,9 @@ export default {
           .then(res => {
             console.log(res);
           })
-          .catch(console.error());
+          .catch((err)=> {
+            console.error(err);
+          });
       }
     }
   }

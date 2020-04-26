@@ -10,6 +10,9 @@ const Axios = require('axios');
 const fileupload = require('express-fileupload');
 const zip = require('zip-local');
 const morgan = require('morgan');
+const depath = require('path');
+
+const directory = "D:/unity project/AR Framework/Assets/StreamingAssets/Wikitude/";
 app.use(fileupload());
 app.use(CORS());
 app.use(morgan('combined'));
@@ -37,7 +40,7 @@ app.post("/createTarget", async (req, res) => {
                 'Content-Type': "application/json"
             }
         }).then((response) => {
-            access_token = "Bearer "+response.data.access_token;
+            access_token = "Bearer " + response.data.access_token;
             console.log(access_token);
         });
         fs.writeFileSync(path + filename, JSON.stringify(req.body, null, 2), function(err) {
@@ -88,16 +91,28 @@ app.get("/file", (req, res) => {
     res.download('D:/unity project/APK/appname.zip');
 })
 app.post("/createQuiz", (req, res) => {
-    console.log("createQuiz" + req.body.allRoundData[0].name)
+	console.log(req.body.allRoundData[0].name);
+    console.log("createQuiz " + req.body.allRoundData[0].name);
     if (req.body) {
         let filename = req.body.allRoundData[0].name + ".JSON"
         fs.writeFile(path + 'quizdata/' + filename, JSON.stringify(req.body, null, 2), function(err) {
             if (err) throw err;
             console.log('Saved!');
+            res.json({message: 'saved'});
         });
+    } else {
+    	res.status(404).end();
     }
 })
-app.post("/uploadTarget", (req, res) => {
+app.post("/uploadTarget", async (req, res) => {
+    await fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+            fs.unlink(depath.join(directory, file), err => {
+                if (err) throw err;
+            });
+        }
+    });
     if (req.files) {
         console.log(req.files.file);
         var file = req.files.file,
@@ -133,7 +148,7 @@ app.post("/uploadVideo", (req, res) => {
     console.log(req.body);
     if (req.files) {
         var file = req.files.file,
-            filename = req.body.name + '.mp4';
+            filename = req.body.name;
         file.mv("D:/unity project/AR Framework/Assets/StreamingAssets/video/" + filename, function(err) {
             if (err) {
                 console.log(err)
