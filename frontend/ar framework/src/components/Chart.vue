@@ -184,8 +184,8 @@ export default {
                   labelString: "X-Axis"
                 },
                 ticks: {
-                  min: -10,
-                  suggestedMax: 10
+                  min: -1,
+                  suggestedMax: 1
                 }
               }
             ],
@@ -197,8 +197,8 @@ export default {
                   labelString: "Y-Axis"
                 },
                 ticks: {
-                  min: -10,
-                  suggestedMax: 10
+                  min: -1,
+                  suggestedMax: 1
                 }
               }
             ]
