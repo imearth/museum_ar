@@ -9,7 +9,7 @@
         <v-container>
             <v-row align="center" justify="center">
                 <v-col cols="9">
-                    <Chart @valueChange="valueChange" style=" background-image:url(C:/Users/imearthz/Documents/GitHub/museum_ar/frontend/ar framework/src/assets/chartbg);"></Chart>
+                    <Chart @valueChange="valueChange" style=" background-image:url(./assets/chartbg/02.jpg);"></Chart>
                 </v-col>
                 <v-col cols="3">
                     <!--  
