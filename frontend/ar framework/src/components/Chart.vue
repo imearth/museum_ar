@@ -280,7 +280,8 @@ export default {
 <style scope>
 #ChartCnvs {
   background-image: url(../assets/chartbg/targetbase.jpg);
-  background-size: 45% 50%; background-repeat:no-repeat;
+  background-size: 395px 400px; 
+  background-repeat:no-repeat;
   background-position: 55% 50%;
 }
 </style>
