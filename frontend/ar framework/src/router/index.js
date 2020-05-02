@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: 'manual',
+    path: '/manual',
     name: 'manual',
     component: Manual
   },
