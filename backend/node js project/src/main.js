@@ -72,6 +72,7 @@ app.post("/createTarget", async (req, res) => {
             res.download(filepath);
         });
         */
+        /*
         await zip.zip(filepath, (err, zipped) => {
             if (!err) {
                 zipped.compress();
@@ -84,6 +85,8 @@ app.post("/createTarget", async (req, res) => {
                 })
             }
         })
+        */
+        res.download('D:/unity project/APK/appname.apk');
         console.log("apk zip downloaded");
     }
 })

@@ -5,9 +5,15 @@ import QuizCreate from '../components/QuizCreate.vue'
 import VideoUpload from '../components/VideoUpload.vue'
 import Position from '../components/Position.vue'
 import Chart from '../components/Chart.vue'
+import Manual from '../components/ViewManual.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: 'manual',
+    name: 'manual',
+    component: Manual
+  },
   {
     path: '/ch',
     name: 'ch',

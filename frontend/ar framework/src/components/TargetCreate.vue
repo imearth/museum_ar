@@ -7,6 +7,7 @@
         <v-card>
             <v-container>
                 <h1>Create Tourist Guide Application With Augmented Reality</h1>
+                <v-btn color="error" href='/manual' >manual</v-btn>
                 <v-row class="align-center">
                     <v-col cols="6">
                         <br />
@@ -89,7 +90,8 @@
 
         <v-row>
             <v-col>
-                <v-btn color="success" @click="writeFile">ดาวน์โหลดไฟล์ JSON สำหรับทำแบบ manual</v-btn>
+                <v-btn color="error" @click="writeFile" >ดาวน์โหลดไฟล์ JSON สำหรับทำแบบ manual</v-btn>
+                <v-btn class="ma-2" outlined color="indigo" href="https://github.com/imearth/museum_ar_prototype" target="_blank">ดาวน์โหลดโปรเจค Unity ต้นแบบ</v-btn>
             </v-col>
         </v-row>
     </v-card>
@@ -222,7 +224,7 @@ export default {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement("a");
                     link.href = url;
-                    link.setAttribute("download", "appname.zip");
+                    link.setAttribute("download", "appname.apk");
                     document.body.appendChild(link);
                     link.click();
                     axios.post("http://localhost:3000/deleteold");

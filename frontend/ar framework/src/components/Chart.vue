@@ -282,6 +282,6 @@ export default {
   background-image: url(../assets/chartbg/targetbase.jpg);
   background-size: 395px 400px; 
   background-repeat:no-repeat;
-  background-position: 55% 50%;
+  background-position: 53% 50%;
 }
 </style>
