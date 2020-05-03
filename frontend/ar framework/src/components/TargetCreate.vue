@@ -7,7 +7,7 @@
         <v-card>
             <v-container>
                 <h1>Create Tourist Guide Application With Augmented Reality</h1>
-                <v-btn color="#00ad00" to="/manual">manual</v-btn>
+                <v-btn color="#00ad00" to="/manual">คู่มือในการใช้งาน</v-btn>
                 <v-row class="align-center">
                     <v-col cols="6">
                         <br />
