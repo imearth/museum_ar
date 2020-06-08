@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using System;
 
 public class VideoController : MonoBehaviour
 {
@@ -14,15 +15,19 @@ public class VideoController : MonoBehaviour
     private VideoPlayer videoPlayer;
     private VideoSource videoSource;
     private string url;
+    private bool stop = false;
     //Audio
     private AudioSource audioSource;
 
     // Use this for initialization
+    /*
     void Start()
     {
-        Application.runInBackground = true;
+        stop = false;
+        Application.runInBackground = false;
         StartCoroutine(playVideo());
     }
+    */
 
     IEnumerator playVideo()
     {
@@ -39,7 +44,7 @@ public class VideoController : MonoBehaviour
         //We want to play from video clip not from url
         //videoPlayer.source = VideoSource.VideoClip;
         url = Application.streamingAssetsPath + "/video/" + ImageIdentifier.GameStage.url +".mp4";
-
+        Debug.Log(url);
 
         //We want to play from url
         videoPlayer.source = VideoSource.Url;
@@ -70,17 +75,50 @@ public class VideoController : MonoBehaviour
 
         //Play Video
         videoPlayer.Play();
-
+        print("videoPlayer");
         //Play Sound
         audioSource.Play();
-
+        print("audioSource");
         Debug.Log("Playing Video");
         while (videoPlayer.isPlaying)
         {
+            if(stop==true)
+            { yield break; ; }
+            
+
+        }
+        /*
+        while (videoPlayer.isPlaying)
+        {
+            print("playing");
             Debug.LogWarning("Video Time: " + Mathf.FloorToInt((float)videoPlayer.time));
             yield return null;
+
         }
+        
+        if(!videoPlayer.isPlaying){
+            print("isplay stop");
+            yield return null;
+        }
+        */
 
         Debug.Log("Done Playing Video");
+        
     }
+
+    internal void startz()
+    {
+        stop = false;
+        Application.runInBackground = true;
+        StartCoroutine("playVideo");
+    }
+
+    public void stopVideo()
+    {
+        videoPlayer.enabled = false;
+        stop = true;
+        print("stopnow");
+    }
+
+
 }

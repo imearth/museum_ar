@@ -88,9 +88,13 @@ public class GameController : MonoBehaviour
 
     public void AnswerButtonClicked(bool isCorrect)
     {
+        Debug.Log(isCorrect);
+        Debug.Log("click");
         if (isCorrect)
         {
-            playerScore += currentRoundData.pointsAddedForCorrectAnswer;                    // If the AnswerButton that was clicked was the correct answer, add points
+            Debug.Log("correct");
+            playerScore++;
+            //playerScore += currentRoundData.pointsAddedForCorrectAnswer;                    // If the AnswerButton that was clicked was the correct answer, add points
             scoreDisplay.text = "Score: " + playerScore.ToString();
         }
 

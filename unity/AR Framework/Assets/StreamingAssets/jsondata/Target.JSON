@@ -1,9 +1,9 @@
 {
-  "projectname": "asd",
+  "projectname": null,
   "targets": [
     {
-      "targetname": "d2",
-      "scriptname": "water_cycle",
+      "targetname": "",
+      "scriptname": "",
       "type": "Video",
       "position_x": "0",
       "position_y": "0",

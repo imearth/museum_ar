@@ -234,7 +234,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 130916, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
       propertyPath: m_Name
-      value: ImageTracker (1)
+      value: ImageTracker
       objectReference: {fileID: 0}
     - target: {fileID: 488580, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11427236, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
       propertyPath: _targetCollectionResource._targetPath
-      value: Wikitude/doraemon.wtc
+      value: Wikitude/tracker (16).wtc
       objectReference: {fileID: 0}
     - target: {fileID: 11427236, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
       propertyPath: _targetCollectionResource.OnFinishLoading.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -331,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 11427236, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
       propertyPath: _targetCollectionResource.OnErrorLoading.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427236, guid: 5d47068e592f24de68efe2fc00b2e73b, type: 3}
+      propertyPath: _targetCollectionResource._useCustomURL
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000012657538596, guid: 5d47068e592f24de68efe2fc00b2e73b,
         type: 3}
@@ -818,6 +822,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuizButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4144244539450703588, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -836,22 +845,22 @@ PrefabInstance:
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.76604444
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.64278764
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
@@ -861,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
@@ -871,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144244539450703591, guid: 4c76a94d89f1acf4b8da5e7063b82f1f,
         type: 3}

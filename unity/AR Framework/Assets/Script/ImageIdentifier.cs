@@ -5,6 +5,7 @@ using Wikitude;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+
 public class ImageIdentifier : MonoBehaviour
 {
 
@@ -14,8 +15,10 @@ public class ImageIdentifier : MonoBehaviour
     public GameObject QuizButton;
     public GameObject VideoMonitor;
     private GameObject Model3DObject;
+    private GameObject obj;
     private float posi_x, posi_y, posi_z;
     private int rotate_x, rotate_y, rotate_z;
+    VideoController ScriptThatYouWant;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class ImageIdentifier : MonoBehaviour
             if(targets[i].targetname == label_name)
             {
                 posi_x = targets[i].position_x;
+                posi_x = 0 - posi_x;
                 posi_y = targets[i].position_y;
                 posi_z = targets[i].position_z;
 
@@ -64,7 +68,7 @@ public class ImageIdentifier : MonoBehaviour
                 if (targets[i].type == "Video")
                 {
                     
-                    print("Video found");
+                    
                     VideoMonitor.transform.parent = recognizedTarget.Drawable.transform;
                     VideoMonitor.transform.localPosition = Vector3.zero;
                     VideoMonitor.SetActive(true);
@@ -72,6 +76,9 @@ public class ImageIdentifier : MonoBehaviour
                     var transform = VideoMonitor.gameObject.transform;
                     transform.position = new Vector3(posi_x, posi_y, posi_z);
                     transform.Rotate(rotate_x, rotate_y, rotate_z);
+                    print("Video found");
+                    ScriptThatYouWant = GameObject.Find("VideoMonitor").GetComponent<VideoController>();
+                    ScriptThatYouWant.startz();
                     break;
                 }
                 if (targets[i].type == "3DObject")
@@ -117,9 +124,18 @@ public class ImageIdentifier : MonoBehaviour
                 }
                 if (targets[i].type == "Video")
                 {
+                    
+                    ScriptThatYouWant.stopVideo();
+                    print("stop");
+
                     VideoMonitor.transform.parent = null;
+
                     VideoMonitor.SetActive(false);
                     print("Video lost");
+
+
+
+
                 }
                 if (targets[i].type == "3DObject")
                 {
